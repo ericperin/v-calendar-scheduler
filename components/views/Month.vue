@@ -5,23 +5,24 @@
         </div>
         <div class="v-cal-days" v-for="row in calendar">
 
-            <div :ref="'days.day_' + day.d.format('DDD')" class="v-cal-day v-cal-day--month"
+             <div :ref="'days.day_' + day.d.format('DDD')" class="v-cal-day v-cal-day--month"
                  @click="dayClicked(day)"
                  :class="{
                  'is-today': day.isToday,
                  'is-past': day.isPast,
                  'is-disabled': day.isDisabled,
-                 'is-different-month': day.isDifferentMonth }" v-for="day in row">
+                 'is-different-month': day.isDifferentMonth }" v-for="day in row" style="background-color: green; color: white">
                 <span class="v-cal-day__number">{{ day.d.date() }}</span>
                 <div class="v-cal-event-list">
-                    <event-item
+                    <div v-if="day.events" class="text-center"><strong>{{day.events.length}}</strong></div>
+                    <!-- <event-item
                             v-for="event, index in day.events"
                             :key="index"
                             :has-dynamic-size="false"
                             :event="event"
                             :use12="use12"
                     >
-                    </event-item>
+                    </event-item> -->
                     <!--@click.stop="eventBus.$emit('event-clicked', event)" -->
                 </div>
             </div>
